@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    
+    <div id="content"></div>
+</div>
+
+    <script type="module">
+import {menu} from './db.js'
+
+const searchParams = new URLSearchParams(window.location.search)
+
+const id = searchParams.get('id')
+
+const found = menu.find((item) => item.id==id)
+
+console.log(found)
+
+document.getElementById("content").innerHTML = `
+
+<div id="card" class="d-flex gap-3 flex-column flex-md-row mt-5 text-decoration-none text-dark">
+<img class="rounded shadow" src=${found.image} alt="">
+<div class="">
+    <div class="d-flex justify-content-between">
+        <h5>${found.title}</h5>
+        <p class="text-success"> $ ${found.price}</p>
+    </div>
+
+    <p class="lead">${found.description}</p>
+</div>
+
+</div>`
+
+    </script>
+</body>
+</html>
